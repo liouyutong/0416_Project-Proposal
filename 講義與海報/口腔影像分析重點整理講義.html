@@ -1,0 +1,373 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>口腔影像分析重點整理講義｜基於 AI 影像辨識之口腔健康監測系統</title>
+  <link rel="stylesheet" href="口腔影像分析重點整理講義.css">
+</head>
+<body>
+
+  <!-- Control Bar (Hidden when printed) -->
+  <div class="control-bar">
+    <button class="btn" onclick="window.print()">
+      <svg width="16" height="16" fill="currentColor" viewBox="0 0 16 16">
+        <path d="M5 1a2 2 0 0 0-2 2v2H2a2 2 0 0 0-2 2v3a2 2 0 0 0 2 2h1v1a2 2 0 0 0 2 2h6a2 2 0 0 0 2-2v-1h1a2 2 0 0 0 2-2V7a2 2 0 0 0-2-2h-1V3a2 2 0 0 0-2-2zM4 3a1 1 0 0 1 1-1h6a1 1 0 0 1 1 1v2H4zm1 5a1 1 0 1 1-2 0 1 1 0 0 1 2 0m7 0a1 1 0 1 1-2 0 1 1 0 0 1 2 0M5 10v3a1 1 0 0 0 1 1h4a1 1 0 0 0 1-1v-3z"/>
+      </svg>
+      列印 / 匯出 PDF
+    </button>
+  </div>
+
+  <!-- Document Card -->
+  <div class="doc-container">
+    
+    <!-- Header -->
+    <header class="doc-header">
+      <h1>口腔影像分析重點整理講義</h1>
+      <div class="doc-subtitle">基於 AI 影像辨識之口腔健康監測系統｜簡報重點與技術解析</div>
+      <div class="doc-meta">
+        <span>整理來源：第九組學術發表簡報《第9組_口腔影像分析.pdf》</span>
+        <span>主編人：AI Agent 智慧助手</span>
+        <span>對象：口腔健康監測、AI 影像辨識學習與複習</span>
+      </div>
+    </header>
+
+    <!-- Summary Box -->
+    <section class="summary-box">
+      <h3>
+        <svg width="16" height="16" fill="currentColor" viewBox="0 0 16 16">
+          <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14m0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16"/>
+          <path d="M5.255 5.786a.237.237 0 0 0 .241.247h.825c.138 0 .248-.113.266-.25.09-.656.54-1.134 1.342-1.134.686 0 1.314.343 1.314 1.168 0 .635-.374.927-.965 1.371-.673.489-1.206 1.06-1.168 1.987l.003.217a.25.25 0 0 0 .25.246h.811a.25.25 0 0 0 .25-.25v-.105c0-.718.273-.927 1.01-1.486.609-.463 1.244-.977 1.244-2.056 0-1.511-1.276-2.241-2.673-2.241-1.267 0-2.655.59-2.75 2.286zm1.557 5.763c0 .533.425.927 1.01.927.609 0 1.028-.394 1.028-.927 0-.552-.42-.94-1.03-.94-.584 0-1.009.388-1.009.94"/>
+        </svg>
+        一句話總結
+      </h3>
+      <p>
+        本系統的核心是「建立居家口腔健康監測的閉環生態系」：透過口腔內窺鏡（硬體層）採集影像，經由手機 App（連線層）將數據同步至雲端，調用 CNN 與 LLM+RAG（算力層）進行牙齒病灶與黏膜風險識別，並為用戶提供個人化潔牙導航與就醫預警，打破傳統半年一次的被動式就醫空白。
+      </p>
+    </section>
+
+    <!-- Section 1 -->
+    <section class="doc-section">
+      <h2 class="section-title">一、專案主軸：以 AI 影像辨識推動「主動式預防醫學」</h2>
+      <p class="section-desc">
+        簡報中強調：傳統口腔照護高度仰賴民眾自發前往牙科診所（<strong>被動式檢查</strong>），導致居家健康監測存在巨大空白。本專案透過結合<strong>居家內窺鏡硬體</strong>與<strong>雲端 AI 影像辨識</strong>，建立一個可持續追蹤的「主動式」口腔管理平台，旨在於輕症（如早期齲齒、去礦化白斑）階段便能提早預警，避免拖延成重症，達到早期防護並降低健保醫療負擔的目標。
+      </p>
+    </section>
+
+    <!-- Section 2 -->
+    <section class="doc-section">
+      <h2 class="section-title">二、動機與量化危機：為什麼需要這套系統？</h2>
+      <p class="section-desc">
+        專案組引述了衛生福利部與行政院多項調查報告，歸納出三大核心數據與口腔危機：
+      </p>
+      <table class="doc-table">
+        <thead>
+          <tr>
+            <th style="width: 25%;">危機面向</th>
+            <th style="width: 25%;">統計數據</th>
+            <th>影響與量化背景</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><strong>成人口腔危機</strong></td>
+            <td>齲齒率高達 <strong>98.6%</strong></td>
+            <td>台灣成人蛀牙率極高。且口腔疾病不僅影響牙齒，更與糖尿病、心血管疾病等全身健康密切相關。</td>
+          </tr>
+          <tr>
+            <td><strong>早期預防缺失</strong></td>
+            <td>平均約有 <strong>14 顆</strong> 齲齒</td>
+            <td>國人成年人平均有過齲齒經驗的牙齒高達14顆。因初期病灶無痛，通常在無形中被忽視。</td>
+          </tr>
+          <tr>
+            <td><strong>未治療齲齒率</strong></td>
+            <td>高達 <strong>42.8%</strong> 未治療</td>
+            <td>超過四成民眾有蛀牙卻未就醫治療，多為輕症患者。本裝置結合高清顯影與 AI 提示以提升民眾病識感，降低延誤就醫。</td>
+          </tr>
+        </tbody>
+      </table>
+    </section>
+
+    <!-- Section 3 -->
+    <section class="doc-section">
+      <h2 class="section-title">三、現行挑戰與痛點：居家監測的三大空白</h2>
+      <div class="highlight-list">
+        <div class="list-item">
+          <div class="list-item-title"><span>1.</span> 居家照護的監測空白：</div>
+          <div class="list-item-desc">民眾個人口腔病歷資料多保留在診所內，居家缺乏日常追蹤工具，使得口腔管理停留在半年一次的被動式洗牙或健檢，缺乏動態防護。</div>
+        </div>
+        <div class="list-item">
+          <div class="list-item-title"><span>2.</span> 手動操作檢查存有盲點：</div>
+          <div class="list-item-desc">雖然市面上有販售居家口腔內視鏡，但一般民眾缺乏專業操作技術，極難完整拍攝後牙與牙齦等死角，且缺乏病灶辨識專業，極易因誤判而延誤就醫。</div>
+        </div>
+        <div class="list-item">
+          <div class="list-item-title"><span>3.</span> 就醫門檻高阻礙防治：</div>
+          <div class="list-item-desc">民眾習慣「痛了才看牙醫」，且常因工作忙碌、門診常需要預約等時間成本限制，導致可逆的初期病灶（去礦化白斑、微小齲齒）演變為不可逆的牙周骨質破壞。</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Section 4 -->
+    <section class="doc-section">
+      <h2 class="section-title">四、系統核心架構：硬體、連線與算力的三層配置</h2>
+      <p class="section-desc">
+        系統在設計上可類比為一個完整的 IoT 資訊流通路徑，分為三大架構層級：
+      </p>
+      <table class="doc-table">
+        <thead>
+          <tr>
+            <th style="width: 20%;">系統層級</th>
+            <th style="width: 25%;">技術組件</th>
+            <th style="width: 25%;">扮演角色</th>
+            <th>功能重點</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><strong>硬體層 (採集)</strong></td>
+            <td>居家口腔內窺鏡</td>
+            <td>感測器／眼睛</td>
+            <td>使用者手持設備，對口腔內部進行多角度的高清影像拍攝。</td>
+          </tr>
+          <tr>
+            <td><strong>連線層 (IoT)</strong></td>
+            <td>手機 App 連線與雲端傳輸</td>
+            <td>神經傳導／傳輸通道</td>
+            <td>收集到的多角度影像即時同步至雲端伺服器，解決數據孤島問題。</td>
+          </tr>
+          <tr>
+            <td><strong>算力層 (AI)</strong></td>
+            <td>CNN 模型 + LLM + RAG</td>
+            <td>運算核心／大腦</td>
+            <td>使用深度學習提取影像病徵，拼接全景口腔地圖，並生成衛教與預警指引。</td>
+          </tr>
+        </tbody>
+      </table>
+    </section>
+
+    <!-- Section 5 -->
+    <section class="doc-section">
+      <h2 class="section-title">五、系統功能亮點：風險識別與個人化指引</h2>
+      <div class="highlight-list">
+        <div class="list-item">
+          <div class="list-item-title"><span>💡</span> 牙齒與口腔風險識別：</div>
+          <div class="list-item-desc">
+            • <strong>結構與牙周</strong>：精準偵測齲齒（蛀牙）、牙齒歪斜與牙結石等硬組織問題。<br>
+            • <strong>黏膜與殘留</strong>：自動辨識口腔潰瘍（口瘡）、牙齦炎，以及牙縫間被忽略的食物殘渣。
+          </div>
+        </div>
+        <div class="list-item">
+          <div class="list-item-title"><span>🧭</span> 個人化健康照護指引：</div>
+          <div class="list-item-desc">
+            • <strong>智能潔牙導航</strong>：自動合成全景地圖，視覺化指出刷牙常遺漏的死角盲區。<br>
+            • <strong>主動就醫預警</strong>：若偵測到高度疑似嚴重牙周病或不可逆病灶時，自動發出就醫通知與評估建議。
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Section 6 -->
+    <section class="doc-section">
+      <h2 class="section-title">六、方法設計與開發六大流程</h2>
+      <table class="doc-table">
+        <thead>
+          <tr>
+            <th style="width: 10%;">步驟</th>
+            <th style="width: 30%;">開發核心名稱</th>
+            <th>實作細節與目的</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><strong>1</strong></td>
+            <td><strong>多角度口腔影像採集</strong></td>
+            <td>提供智慧引導框，協助使用者在家也能輕易對盲區後牙與牙齦進行拍攝。</td>
+          </tr>
+          <tr>
+            <td><strong>2</strong></td>
+            <td><strong>AI 全景影像拼接技術</strong></td>
+            <td>將多個視角、有重疊的多張照片，無縫融合成一張全景口腔地圖，消除盲區。</td>
+          </tr>
+          <tr>
+            <td><strong>3</strong></td>
+            <td><strong>CNN 深度辨識模型</strong></td>
+            <td>使用卷積神經網路（CNN）提取圖像特徵，對病灶（如早期蛀牙）做分類與定位。</td>
+          </tr>
+          <tr>
+            <td><strong>4</strong></td>
+            <td><strong>醫療量化數據分析</strong></td>
+            <td>將病灶資訊轉化為嚴重度評級，提供可追蹤的數字化健康指標。</td>
+          </tr>
+          <tr>
+            <td><strong>5</strong></td>
+            <td><strong>高風險主動預警系統</strong></td>
+            <td>設定風險防線，偵測到高危急病徵（如牙齦萎縮、疑似膿腫）時主動發出通知。</td>
+          </tr>
+          <tr>
+            <td><strong>6</strong></td>
+            <td><strong>個人化潔牙指引導航</strong></td>
+            <td>基於拼接的地圖，回饋潔牙弱點並引導正確的刷牙順序。</td>
+          </tr>
+        </tbody>
+      </table>
+    </section>
+
+    <!-- Section 7 -->
+    <section class="doc-section">
+      <h2 class="section-title">七、實驗評估與效能驗證指標</h2>
+      <p class="section-desc">為了確保居家系統的可靠性與醫療實用性，專案設置了三大驗證維度：</p>
+      <div class="highlight-list">
+        <div class="list-item">
+          <div class="list-item-title"><span>1.</span> 拍攝導引成功率評估：</div>
+          <div class="list-item-desc">評估使用者搭配「智慧引導框」時的拍攝成功率，測量指標包含影像清晰度、拼接所需的照片重疊率以及整體操作時間，驗證全景圖品質。</div>
+        </div>
+        <div class="list-item">
+          <div class="list-item-title"><span>2.</span> CNN 多病灶辨識性能評估：</div>
+          <div class="list-item-desc">主要針對不易察覺的「早期去礦化白斑」進行測試，以 <strong>Precision (精準率)</strong> 與 <strong>Recall (召回率)</strong> 作為衡量模型是否漏判的核心指標。</div>
+        </div>
+        <div class="list-item">
+          <div class="list-item-title"><span>3.</span> LLM + RAG 衛教建議品質評估：</div>
+          <div class="list-item-desc">評估系統所生成居家照護指引的「醫學正確性」，驗證檢索增強生成（RAG）技術是否能將專業醫學文獻，無誤且通俗易懂地轉化為個人化建議。</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Section 8 -->
+    <section class="doc-section">
+      <h2 class="section-title">八、研究發現與預期成效</h2>
+      <div class="highlight-list">
+        <div class="list-item">
+          <div class="list-item-title">• 降低未治療率：</div>
+          <div class="list-item-desc">利用即時提醒功能和高風險預警，縮短疾病察覺週期，推動民眾回診與就醫，有效提高早期就醫率。</div>
+        </div>
+        <div class="list-item">
+          <div class="list-item-title">• 延長牙齒壽命：</div>
+          <div class="list-item-desc">藉由智能潔牙指引，改善國人刷牙盲區，降低牙周病致缺牙的風險，延長原生牙的使用壽命。</div>
+        </div>
+        <div class="list-item">
+          <div class="list-item-title">• 數位化健康長照：</div>
+          <div class="list-item-desc">建立個人的口腔歷史影像資料庫，使高齡化社會的居家長照也能落實精準的牙齒健康管理。</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Section 9 -->
+    <section class="doc-section">
+      <h2 class="section-title circle-bullet">九、學生與複習者必背的 12 句話</h2>
+      <div class="takeaways-grid">
+        <div class="takeaway-item"><div class="takeaway-num">1</div><span>「牙視界」的核心理念是將被動式門診檢查轉為主動式居家監測。</span></div>
+        <div class="takeaway-item"><div class="takeaway-num">2</div><span>台灣成人齲齒率高達 98.6%，口腔健康與全身系統性疾病（如糖尿病）密切相關。</span></div>
+        <div class="takeaway-item"><div class="takeaway-num">3</div><span>現行居家照護最大的痛點是「監測空白」與「操作盲點」。</span></div>
+        <div class="takeaway-item"><div class="takeaway-num">4</div><span>系統架構的硬體層負責影像採集，連線層負責雲端同步，算力層負責 AI 辨識。</span></div>
+        <div class="takeaway-item"><div class="takeaway-num">5</div><span>牙齒風險識別功能同時涵蓋硬組織（齲齒、歪斜）與軟組織（潰瘍、發炎）。</span></div>
+        <div class="takeaway-item"><div class="takeaway-num">6</div><span>個人化照護指引包含智能潔牙導航與高風險主動就醫預警。</span></div>
+        <div class="takeaway-item"><div class="takeaway-num">7</div><span>AI 全景影像拼接技術旨在克服單張內窺鏡影像視角有限、易遺漏的死角問題。</span></div>
+        <div class="takeaway-item"><div class="takeaway-num">8</div><span>CNN 模型在系統中負責病灶圖像特徵提取、分類與定位。</span></div>
+        <div class="takeaway-item"><div class="takeaway-num">9</div><span>實驗驗證主要使用 Precision 與 Recall 評估早期病灶辨識性能，防範漏診。</span></div>
+        <div class="takeaway-item"><div class="takeaway-num">10</div><span>LLM 加上 RAG 技術被用來確保生成的衛教與就醫指引具備醫學正確性且通俗易懂。</span></div>
+        <div class="takeaway-item"><div class="takeaway-num">11</div><span>專案的三大預期成效為降低未治療率、延長原生牙壽命與實現數位健康管理。</span></div>
+        <div class="takeaway-item"><div class="takeaway-num">12</div><span>真正的學習核心是理解如何整合 IoT 傳輸與 AI 模型來解決真實世界的居家健康痛點。</span></div>
+      </div>
+    </section>
+
+    <!-- Section 10 -->
+    <section class="doc-section">
+      <h2 class="section-title">十、專案開發與測試行動清單</h2>
+      <table class="checklist-table">
+        <thead>
+          <tr>
+            <th style="width: 25%;">階段與面向</th>
+            <th>要執行的開發與測試工作</th>
+            <th class="checkbox-col">完成檢查</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><strong>硬體與影像採集</strong></td>
+            <td>確認居家內窺鏡的解析度與連線穩定度，建立包含多視角後牙與牙齦的影像資料集。</td>
+            <td>
+              <div class="checkbox-container">
+                <span>□ 已完成</span><span>□ 需確認</span>
+              </div>
+            </td>
+          </tr>
+          <tr>
+            <td><strong>全景拼接演算法</strong></td>
+            <td>測試全景拼接演算法在不同重疊率、清晰度與操作時間下的拼接品質。</td>
+            <td>
+              <div class="checkbox-container">
+                <span>□ 已完成</span><span>□ 需確認</span>
+              </div>
+            </td>
+          </tr>
+          <tr>
+            <td><strong>CNN模型訓練</strong></td>
+            <td>收集去礦化白斑、早期齲齒、潰瘍病灶數據集，進行 CNN 模型權重訓練與超參數調優。</td>
+            <td>
+              <div class="checkbox-container">
+                <span>□ 已完成</span><span>□ 需確認</span>
+              </div>
+            </td>
+          </tr>
+          <tr>
+            <td><strong>模型效能評估</strong></td>
+            <td>計算 CNN 模型對早期白斑與齲齒的 Precision 與 Recall，確保漏判率低於設計指標。</td>
+            <td>
+              <div class="checkbox-container">
+                <span>□ 已完成</span><span>□ 需確認</span>
+              </div>
+            </td>
+          </tr>
+          <tr>
+            <td><strong>LLM + RAG 整合</strong></td>
+            <td>導入醫學共識與口腔衛教知識庫，測試並評估 RAG 所生成引導建議的醫學正確性。</td>
+            <td>
+              <div class="checkbox-container">
+                <span>□ 已完成</span><span>□ 需確認</span>
+              </div>
+            </td>
+          </tr>
+          <tr>
+            <td><strong>集成與用戶體驗</strong></td>
+            <td>整合 App 雲端傳輸，在真實居家環境下進行易用性測試（測試智慧引導框是否易於操作）。</td>
+            <td>
+              <div class="checkbox-container">
+                <span>□ 已完成</span><span>□ 需確認</span>
+              </div>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </section>
+
+    <!-- Section 11 -->
+    <section class="doc-section">
+      <h2 class="section-title">十一、品質控制檢核與建議補件</h2>
+      
+      <div class="alert-block" style="margin-bottom: 10px;">
+        <h4>⚠️ 資訊查證提醒</h4>
+        由於 PDF 來源為專案發表簡報，部分底層 CNN 模型具體參數量、RAG 使用之開源大語言模型型號在簡報中未有詳細記載。開發前請以實際編寫之程式碼設定為準。
+      </div>
+
+      <div class="highlight-list">
+        <div class="list-item">
+          <div class="list-item-title">● A. 已完成項目：</div>
+          <div class="list-item-desc">
+            • 已將簡報核心脈絡拆解整理為「主動式預防理念 → 數據危機 → 居家監測空白 → IoT三層架構 → 核心亮點 → 實驗指標 → 複習要點」。<br>
+            • 已將簡報中的術語（CNN 辨識、全景拼接、RAG）與醫學數據完全校正並分類列出。
+          </div>
+        </div>
+        <div class="list-item">
+          <div class="list-item-title">● B. 建議補件：</div>
+          <div class="list-item-desc">
+            • 補充系統 App 與硬體設備實際照片或原型圖，可再轉換成 A4 高密度資訊圖表。<br>
+            • 補充 CNN 對各類牙齒病灶的混淆矩陣 (Confusion Matrix) 與訓練曲線 (Loss Curve)。
+          </div>
+        </div>
+      </div>
+    </section>
+
+  </div>
+
+</body>
+</html>

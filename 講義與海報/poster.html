@@ -1,0 +1,329 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>牙視界：基於 AI 影像辨識之口腔健康監測系統</title>
+  <link rel="stylesheet" href="poster.css">
+</head>
+<body>
+
+  <!-- Control Bar (Hidden when printed) -->
+  <div class="control-bar">
+    <button class="btn" onclick="window.print()">
+      <svg width="16" height="16" fill="currentColor" viewBox="0 0 16 16">
+        <path d="M5 1a2 2 0 0 0-2 2v2H2a2 2 0 0 0-2 2v3a2 2 0 0 0 2 2h1v1a2 2 0 0 0 2 2h6a2 2 0 0 0 2-2v-1h1a2 2 0 0 0 2-2V7a2 2 0 0 0-2-2h-1V3a2 2 0 0 0-2-2zM4 3a1 1 0 0 1 1-1h6a1 1 0 0 1 1 1v2H4zm1 5a1 1 0 1 1-2 0 1 1 0 0 1 2 0m7 0a1 1 0 1 1-2 0 1 1 0 0 1 2 0M5 10v3a1 1 0 0 0 1 1h4a1 1 0 0 0 1-1v-3z"/>
+      </svg>
+      列印 / 匯出 PDF
+    </button>
+  </div>
+
+  <!-- Poster Main Container -->
+  <div class="poster-container" id="poster">
+    
+    <!-- Title & Metadata Header -->
+    <header class="poster-header">
+      <div class="header-left">
+        <h1>牙視界：基於 AI 影像辨識<br>之口腔健康監測系統</h1>
+        <div class="subtitle-row">
+          <span class="tag">第九組專案研發成果</span>
+          <span>廖沛昀 (4112056033) 、 黃喻琦 (4112056032) 、 劉禹彤 (4112056006)</span>
+        </div>
+      </div>
+      <div class="header-right-card">
+        <div class="card-title">
+          <span>🎯</span> 系統核心目標
+        </div>
+        <ul>
+          <li>提供居家口腔自我監測，破除健檢空白</li>
+          <li>利用 AI 深度學習技術，提早預警早期病灶</li>
+          <li>結合個人化潔牙導航與 LLM 就醫評估</li>
+        </ul>
+      </div>
+    </header>
+
+    <!-- Two-Column Grid Body -->
+    <div class="poster-body">
+      
+      <!-- Left Column -->
+      <div class="column">
+        
+        <!-- Section 1: 動機與量化危機 (Coral) -->
+        <section class="section-box theme-coral">
+          <div class="section-header">
+            <span class="num-badge">1</span>
+            <span>動機與量化危機</span>
+          </div>
+          <div class="section-content">
+            
+            <div class="info-card">
+              <div class="info-card-icon">🦷</div>
+              <div class="info-card-text">
+                <span class="info-card-title">現狀危機與全身健康</span>
+                <span class="info-card-desc">
+                  台灣成人齲齒率高達 <strong>98.6%</strong>。口腔疾病不僅危害牙齒結構，更與<strong>糖尿病、心血管疾病</strong>等全身健康密切相關。
+                </span>
+              </div>
+            </div>
+
+            <div class="info-card">
+              <div class="info-card-icon">📈</div>
+              <div class="info-card-text">
+                <span class="info-card-title">AI 技術落實早期預防</span>
+                <span class="info-card-desc">
+                  衛福部調查顯示，成年人平均有 <strong>14 顆</strong> 齲齒經驗。透過 AI 影像辨識可提早警示病灶，實現早期預防，進而降低後續醫療負擔。
+                </span>
+                <span class="source-tag">資料來源：我國成年及老年人口腔健康調查計畫</span>
+              </div>
+            </div>
+
+            <div class="info-card">
+              <div class="info-card-icon">⚠️</div>
+              <div class="info-card-text">
+                <span class="info-card-title">未治療率的量化危機</span>
+                <span class="info-card-desc">
+                  高達 <strong>42.8%</strong> 的成人有未治療齲齒。因初期病灶無痛而易被忽視，本裝置結合高清顯影與 AI 提示，旨在提升民眾病識感，減少延誤治療。
+                </span>
+                <span class="source-tag">資料來源：衛福部發布之成人口腔保健數據</span>
+              </div>
+            </div>
+
+          </div>
+        </section>
+
+        <!-- Section 3: 系統核心架構 (Indigo) -->
+        <section class="section-box theme-indigo">
+          <div class="section-header">
+            <span class="num-badge">3</span>
+            <span>系統核心架構</span>
+          </div>
+          <div class="section-content">
+            <div class="flow-container">
+              <div class="flow-step">
+                <div class="flow-step-icon">📸</div>
+                <div class="flow-step-title">硬體層 (採集)</div>
+                <div class="flow-step-desc">使用居家口腔內窺鏡拍攝牙齒內部影像</div>
+              </div>
+              <div class="flow-arrow">➔</div>
+              <div class="flow-step">
+                <div class="flow-step-icon">☁️</div>
+                <div class="flow-step-title">連線層 (IoT)</div>
+                <div class="flow-step-desc">手機 App 即時連線並同步數據至雲端</div>
+              </div>
+              <div class="flow-arrow">➔</div>
+              <div class="flow-step">
+                <div class="flow-step-icon">🧠</div>
+                <div class="flow-step-title">算力層 (AI)</div>
+                <div class="flow-step-desc">深度學習模型提取病徵，識別牙齒問題</div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- Section 5: 方法設計與開發 (Purple) -->
+        <section class="section-box theme-purple">
+          <div class="section-header">
+            <span class="num-badge">5</span>
+            <span>方法設計與開發流程</span>
+          </div>
+          <div class="section-content">
+            <div class="grid-6">
+              <div class="grid-item">
+                <span class="grid-item-num">1</span>
+                <span class="grid-item-text">多角度口腔影像採集</span>
+              </div>
+              <div class="grid-item">
+                <span class="grid-item-num">2</span>
+                <span class="grid-item-text">AI 全景影像拼接技術</span>
+              </div>
+              <div class="grid-item">
+                <span class="grid-item-num">3</span>
+                <span class="grid-item-text">CNN 深度辨識模型</span>
+              </div>
+              <div class="grid-item">
+                <span class="grid-item-num">4</span>
+                <span class="grid-item-text">醫療量化數據分析</span>
+              </div>
+              <div class="grid-item">
+                <span class="grid-item-num">5</span>
+                <span class="grid-item-text">高風險主動預警系統</span>
+              </div>
+              <div class="grid-item">
+                <span class="grid-item-num">6</span>
+                <span class="grid-item-text">個人化潔牙指引導航</span>
+              </div>
+            </div>
+          </div>
+        </section>
+
+      </div>
+
+      <!-- Right Column -->
+      <div class="column">
+        
+        <!-- Section 2: 挑戰與問題 (Crimson) -->
+        <section class="section-box theme-crimson">
+          <div class="section-header">
+            <span class="num-badge">2</span>
+            <span>現行挑戰與痛點</span>
+          </div>
+          <div class="section-content">
+            
+            <div class="info-card">
+              <div class="info-card-icon">🔍</div>
+              <div class="info-card-text">
+                <span class="info-card-title">居家照護的監測空白</span>
+                <span class="info-card-desc">
+                  現行口腔檢查高度仰賴牙科診所，民眾居家缺乏持續追蹤的工具，使口腔管理停留在半年一次的被動式檢查。
+                </span>
+              </div>
+            </div>
+
+            <div class="info-card">
+              <div class="info-card-icon">🕳️</div>
+              <div class="info-card-text">
+                <span class="info-card-title">手動操作盲點與誤判風險</span>
+                <span class="info-card-desc">
+                  市售居家內視鏡雖然便宜，但民眾難以完整拍攝後牙等死角，且缺乏專業辨識能力，容易因誤判而延誤就醫。
+                </span>
+              </div>
+            </div>
+
+            <div class="info-card">
+              <div class="info-card-icon">⏳</div>
+              <div class="info-card-text">
+                <span class="info-card-title">就醫門檻高致輕症拖延</span>
+                <span class="info-card-desc">
+                  民眾常因「有痛才就醫」或診所預約不易、缺乏時間，使初期可逆的口腔病灶演變為不可逆的牙周破壞。
+                </span>
+                <span class="source-tag">資料來源：行政院建立我國性別平等指數架構研究案報告</span>
+              </div>
+            </div>
+
+          </div>
+        </section>
+
+        <!-- Section 4: 系統功能亮點 (Teal) -->
+        <section class="section-box theme-teal">
+          <div class="section-header">
+            <span class="num-badge">4</span>
+            <span>系統功能亮點</span>
+          </div>
+          <div class="section-content">
+            <div class="split-features">
+              <div class="feature-col">
+                <div class="feature-col-title">🦷 牙齒風險識別</div>
+                <ul class="feature-list">
+                  <li>
+                    <strong>結構與牙周偵測</strong>
+                    偵測齲齒、牙齒歪斜與牙結石等硬組織問題。
+                  </li>
+                  <li>
+                    <strong>黏膜與殘留辨識</strong>
+                    辨識口腔潰瘍、發炎，以及牙縫間食物殘渣。
+                  </li>
+                </ul>
+              </div>
+              <div class="feature-col">
+                <div class="feature-col-title">🗺️ 個人化健康指引</div>
+                <ul class="feature-list">
+                  <li>
+                    <strong>智能潔牙導航</strong>
+                    生成口腔地圖，指出刷牙時被忽略的盲區。
+                  </li>
+                  <li>
+                    <strong>主動就醫預警</strong>
+                    偵測疑似嚴重牙周病時，自動發出專業就醫建議。
+                  </li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- Section 6: 實驗與評估 (Navy) -->
+        <section class="section-box theme-navy">
+          <div class="section-header">
+            <span class="num-badge">6</span>
+            <span>實驗評估與效能驗證</span>
+          </div>
+          <div class="section-content">
+            
+            <div class="eval-card">
+              <span class="eval-title">1. 拍攝導引成功率評估</span>
+              <span class="eval-desc">
+                測試智慧引導框是否能有效協助使用者在居家環境下精準拍攝後牙與牙齦等死角，並檢測拼接影像清晰度與操作時間。
+              </span>
+            </div>
+
+            <div class="eval-card">
+              <span class="eval-title">2. CNN 多病灶辨識效能</span>
+              <span class="eval-desc">
+                針對早期口腔病灶、去礦化白斑等不易察覺症狀進行偵測，並以 **Precision (精準率)** 與 **Recall (召回率)** 評估模型精確性。
+              </span>
+            </div>
+
+            <div class="eval-card">
+              <span class="eval-title">3. LLM + RAG 導航品質評估</span>
+              <span class="eval-desc">
+                評估系統發出之衛教建議與預警的醫學正確性，驗證檢索增強生成 (RAG) 提供的建議是否專業且通俗易懂。
+              </span>
+            </div>
+
+          </div>
+        </section>
+
+      </div>
+
+    </div>
+
+    <!-- Section 7: 研究發現與預期成效 (Green - Full Width) -->
+    <section class="section-box theme-green">
+      <div class="section-header">
+        <span class="num-badge">7</span>
+        <span>研究發現與預期成效</span>
+      </div>
+      <div class="section-content">
+        <div class="green-card">
+          <div class="green-card-icon">📉</div>
+          <span class="green-card-title">降低未治療率</span>
+          <span class="green-card-desc">藉由 App 即時提醒功能與清晰影像警示，顯著提高民眾就醫意願，大幅縮短口腔疾病被察覺的時間。</span>
+        </div>
+        <div class="green-card">
+          <div class="green-card-icon">🦷</div>
+          <span class="green-card-title">延長牙齒壽命</span>
+          <span class="green-card-desc">有效監測每日潔牙品質與死角殘渣，引導建立正確刷牙習慣，降低國人缺牙與拔牙危機。</span>
+        </div>
+        <div class="green-card">
+          <div class="green-card-icon">📲</div>
+          <span class="green-card-title">數位化健康管理</span>
+          <span class="green-card-desc">建立個人雲端口腔影像歷程，落實牙齒長照與居家主動式追蹤，全面提升高齡化社會之生活品質。</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- Bottom Highlights (Reminder & Summary) -->
+    <footer class="bottom-cards-container">
+      
+      <div class="reminder-card">
+        <div class="reminder-icon">💡</div>
+        <div class="reminder-content">
+          <span class="reminder-title">牙醫小撇步</span>
+          <span class="reminder-text">牙齒健康是全身健康的基石，預防勝於治療！定期進行被動牙科檢查的同時，搭配「牙視界」的居家 AI 智慧監測，讓疾病在萌芽期就被消滅。</span>
+        </div>
+      </div>
+
+      <div class="summary-card">
+        <div class="summary-icon">🚀</div>
+        <div class="summary-content">
+          <span class="summary-title">專案開發總結</span>
+          <span class="summary-text">「牙視界」打破了居家監測的空白，以創新的影像拼接與 CNN 辨識技術，將口腔健康自主權交回民眾手中。科技防齲，守護自信微笑！</span>
+        </div>
+      </div>
+
+    </footer>
+
+  </div>
+
+</body>
+</html>
